@@ -1,27 +1,35 @@
 package com.store.v1.assembler;
 
 import com.store.domain.model.Department;
+import com.store.v1.controller.DepartmentController;
 import com.store.v1.model.DepartmentModel;
-import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Component
-@AllArgsConstructor
-public class DepartmentAssembler {
+public class DepartmentAssembler extends RepresentationModelAssemblerSupport<Department, DepartmentModel> {
 
     private final ModelMapper modelMapper;
 
-    public DepartmentModel toDomain(Department department) {
-        return modelMapper.map(department, DepartmentModel.class);
+    public DepartmentAssembler(ModelMapper modelMapper) {
+        super(DepartmentController.class, DepartmentModel.class);
+        this.modelMapper = modelMapper;
+    }
+    @Override
+    public DepartmentModel toModel(Department department) {
+        DepartmentModel departmentModel = createModelWithId(department.getId(), department);
+        modelMapper.map(department, departmentModel);
+
+        departmentModel.add(linkTo(DepartmentController.class).withRel("department"));
+        return departmentModel;
     }
 
-    public List<DepartmentModel> toCollectionModel(List<Department> departmentList) {
-        return departmentList.stream()
-                .map(this::toDomain)
-                .collect(Collectors.toList());
+    @Override
+    public CollectionModel<DepartmentModel> toCollectionModel(Iterable<? extends Department> entities) {
+        return super.toCollectionModel(entities);
     }
 }

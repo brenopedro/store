@@ -1,7 +1,7 @@
 package com.store.v1.assembler;
 
 import com.store.domain.model.Department;
-import com.store.v1.model.DepartmentInput;
+import com.store.v1.model.input.DepartmentInput;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
