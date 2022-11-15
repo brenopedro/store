@@ -1,7 +1,7 @@
-package com.store.controller;
+package com.store.v1.controller;
 
-import com.store.model.Product;
-import com.store.repository.ProductRepository;
+import com.store.domain.model.Product;
+import com.store.domain.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/product")
+@RequestMapping("v1//product")
 public class ProductController {
 
     private final ProductRepository productRepository;

@@ -1,4 +1,4 @@
-package com.store.model;
+package com.store.domain.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,6 +26,7 @@ public class Product {
     private String productType;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinTable(name = "product_department", joinColumns = @JoinColumn(name = "product_id"),
+                inverseJoinColumns = @JoinColumn(name = "department_id"))
     private Department department;
 }
