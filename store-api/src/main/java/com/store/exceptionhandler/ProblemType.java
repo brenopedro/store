@@ -6,15 +6,14 @@ import lombok.Getter;
 public enum ProblemType {
 
     INVALID_DATA("Invalid data"),
-    ACESSO_NEGADO("Acesso negado"),
-    ERRO_DE_SISTEMA("Erro de sistema"),
-    PARAMETRO_INVALIDO("Parâmetro inválido"),
+    ACCESS_DENIED("Access denied"),
+    SYSTEM_ERROR("System error"),
+    INVALID_PARAMETER("Invalid parameter"),
     INCOMPREHENSIBLE_MESSAGE("Incomprehensible message"),
-    RECURSO_NAO_ENCONTRADO("Recurso não encontrado"),
-    ENTIDADE_EM_USO("Entidade em uso"),
-    ERRO_NEGOCIO("Violação de regra de negócio");
+    RESOURCE_NOT_FOUND("Resource not found"),
+    ENTITY_IN_USE("Entity in use");
 
-    private String title;
+    private final String title;
     ProblemType(String title) {
         this.title = title;
     }

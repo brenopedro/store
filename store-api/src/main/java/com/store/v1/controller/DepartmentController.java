@@ -1,7 +1,7 @@
 package com.store.v1.controller;
 
-import com.store.domain.model.Department;
-import com.store.domain.repository.DepartmentRepository;
+  import com.store.domain.model.Department;
+  import com.store.domain.repository.DepartmentRepository;
 import com.store.domain.service.DepartmentService;
 import com.store.v1.assembler.DepartmentAssembler;
 import com.store.v1.assembler.DepartmentDisassembler;
@@ -33,14 +33,17 @@ public class DepartmentController implements DepartmentControllerOpenApi {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Department> getDepartment(@PathVariable Long id) {
-        return ResponseEntity.ok(departmentRepository.findById(id).orElseThrow());
+    public ResponseEntity<DepartmentModel> getDepartment(@PathVariable Long id) {
+        return ResponseEntity.ok(departmentAssembler.toModel(departmentService.getDepartment(id)));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Department postDepartment(@RequestBody @Valid DepartmentInput departmentInput) {
-        return departmentService.save(departmentDisassembler.toDomainObject(departmentInput));
+    public DepartmentModel postDepartment(@RequestBody @Valid DepartmentInput departmentInput) {
+        Department departmentSaved = departmentService.save(
+                departmentDisassembler.toDomainObject(departmentInput));
+
+        return departmentAssembler.toModel(departmentSaved);
     }
 
     @DeleteMapping("/{id}")
