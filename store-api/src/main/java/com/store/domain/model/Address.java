@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Address {
-    @javax.persistence.Id
+    @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
@@ -22,7 +22,6 @@ public class Address {
     private String state;
 
     @ManyToOne
-    @JoinTable(name = "address_user", joinColumns = @JoinColumn(name = "address_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }

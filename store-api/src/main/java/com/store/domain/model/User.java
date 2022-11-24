@@ -1,16 +1,18 @@
 package com.store.domain.model;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
+
+import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
-    @javax.persistence.Id
+    @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
@@ -18,5 +20,8 @@ public class User {
     private String name;
     private String email;
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Address> addresses;
 
 }
