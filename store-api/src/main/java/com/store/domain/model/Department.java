@@ -2,9 +2,11 @@ package com.store.domain.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -19,6 +21,7 @@ public class Department {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
-    private List<Product> products;
+    @ToString.Exclude
+    @OneToMany(mappedBy = "department")
+    private Set<Product> products = new HashSet<>();
 }

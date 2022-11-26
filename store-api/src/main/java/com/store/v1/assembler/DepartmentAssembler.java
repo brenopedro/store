@@ -1,6 +1,7 @@
 package com.store.v1.assembler;
 
 import com.store.domain.model.Department;
+import com.store.v1.StoreLinks;
 import com.store.v1.controller.DepartmentController;
 import com.store.v1.model.DepartmentModel;
 import org.modelmapper.ModelMapper;
@@ -15,16 +16,19 @@ public class DepartmentAssembler extends RepresentationModelAssemblerSupport<Dep
 
     private final ModelMapper modelMapper;
 
-    public DepartmentAssembler(ModelMapper modelMapper) {
+    private final StoreLinks storeLinks;
+
+    public DepartmentAssembler(ModelMapper modelMapper, StoreLinks storeLinks) {
         super(DepartmentController.class, DepartmentModel.class);
         this.modelMapper = modelMapper;
+        this.storeLinks = storeLinks;
     }
     @Override
     public DepartmentModel toModel(Department department) {
         DepartmentModel departmentModel = createModelWithId(department.getId(), department);
         modelMapper.map(department, departmentModel);
 
-        departmentModel.add(linkTo(DepartmentController.class).withRel("department"));
+        departmentModel.add(storeLinks.linkToDepartments("departments"));
         return departmentModel;
     }
 

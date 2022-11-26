@@ -1,6 +1,6 @@
 package com.store.exceptionhandler;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.store.domain.exception.EntityInUseException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
@@ -19,16 +19,30 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     private final String GENERIC_FINAL_USER_MESSAGE = "An unexpect internal error occurred. Try again.";
 
-    @Autowired
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
 
+    public ApiExceptionHandler(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
+
+    @ExceptionHandler(EntityInUseException.class)
+    public ResponseEntity<?> handleEntityInUse(EntityInUseException ex, WebRequest request) {
+        HttpStatus status = HttpStatus.CONFLICT;
+        ProblemType problemType = ProblemType.ENTITY_IN_USE;
+        String detail = ex.getMessage();
+
+        Problem problem = createProblemBuilder(status, problemType, detail)
+                .userMessage(detail)
+                .build();
+
+        return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+    }
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<Object> handleNoSuchElementException(NoSuchElementException ex, WebRequest request) {
         HttpStatus status = HttpStatus.NOT_FOUND;

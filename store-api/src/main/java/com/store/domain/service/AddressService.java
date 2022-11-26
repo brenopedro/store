@@ -5,7 +5,8 @@ import com.store.domain.model.Address;
 import com.store.domain.repository.AddressRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 @AllArgsConstructor
@@ -23,8 +24,8 @@ public class AddressService {
     }
 
     @Transactional
-    public void delete(Long addressId) {
-        Address address = getAddress(addressId);
+    public void delete(Long id) {
+        Address address = getAddress(id);
         addressRepository.delete(address);
     }
 }
