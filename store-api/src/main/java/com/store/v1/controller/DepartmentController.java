@@ -18,7 +18,7 @@ import javax.validation.Valid;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/v1/department")
+@RequestMapping("/v1/departments")
 public class DepartmentController implements DepartmentControllerOpenApi {
 
     private final DepartmentAssembler departmentAssembler;
@@ -32,9 +32,9 @@ public class DepartmentController implements DepartmentControllerOpenApi {
         return ResponseEntity.ok(departmentAssembler.toCollectionModel(departmentRepository.findAll()));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<DepartmentModel> getDepartment(@PathVariable Long id) {
-        return ResponseEntity.ok(departmentAssembler.toModel(departmentService.getDepartment(id)));
+    @GetMapping("/{departmentId}")
+    public ResponseEntity<DepartmentModel> getDepartment(@PathVariable Long departmentId) {
+        return ResponseEntity.ok(departmentAssembler.toModel(departmentService.getDepartment(departmentId)));
     }
 
     @PostMapping
@@ -46,9 +46,9 @@ public class DepartmentController implements DepartmentControllerOpenApi {
         return departmentAssembler.toModel(departmentSaved);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{departmentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteDepartment(@PathVariable Long id) {
-        departmentService.delete(id);
+    public void deleteDepartment(@PathVariable Long departmentId) {
+        departmentService.delete(departmentId);
     }
 }

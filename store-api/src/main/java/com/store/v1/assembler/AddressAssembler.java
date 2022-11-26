@@ -25,7 +25,7 @@ public class AddressAssembler extends RepresentationModelAssemblerSupport<Addres
         AddressModel addressModel = createModelWithId(address.getId(), address);
         modelMapper.map(address, addressModel);
 
-        addressModel.add(linkTo(DepartmentController.class).withRel("address"));
+        addressModel.add(linkTo(AddressController.class).withRel("address"));
         return addressModel;
     }
 

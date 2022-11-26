@@ -13,12 +13,24 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    @Column(nullable = false)
     private String cep;
+
+    @Column(nullable = false)
     private String street;
+
+    @Column(nullable = false)
     private String number;
+
     private String complement;
+
+    @Column(nullable = false)
     private String neighborhood;
+
+    @Column(nullable = false)
     private String city;
+
+    @Column(nullable = false)
     private String state;
 
     @ManyToOne

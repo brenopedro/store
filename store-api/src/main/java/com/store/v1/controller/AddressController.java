@@ -32,9 +32,9 @@ public class AddressController implements AddressControllerOpenApi {
         return ResponseEntity.ok(addressAssembler.toCollectionModel(addressRepository.findAll()));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<AddressModel> getAddress(@PathVariable Long id) {
-        return ResponseEntity.ok(addressAssembler.toModel(addressService.getAddress(id)));
+    @GetMapping("/{addressId}")
+    public ResponseEntity<AddressModel> getAddress(@PathVariable Long addressId) {
+        return ResponseEntity.ok(addressAssembler.toModel(addressService.getAddress(addressId)));
     }
 
     @PostMapping
@@ -46,9 +46,9 @@ public class AddressController implements AddressControllerOpenApi {
         return addressAssembler.toModel(addressSaved);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{addressId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteAddress(@PathVariable Long id) {
-        addressService.delete(id);
+    public void deleteAddress(@PathVariable Long addressId) {
+        addressService.delete(addressId);
     }
 }
