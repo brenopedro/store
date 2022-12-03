@@ -24,7 +24,6 @@ public class ProductInput {
     @NotNull
     private Integer inventory;
 
-    private BigDecimal offer;
     private String brand;
 
     @NotBlank

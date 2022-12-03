@@ -2,6 +2,7 @@ package com.store.domain.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
 @Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Product {
+public class Product extends AbstractAggregateRoot<Product> {
 
     @Id
     @EqualsAndHashCode.Include
@@ -28,7 +29,6 @@ public class Product {
     @Column(nullable = false)
     private Integer inventory;
 
-    private BigDecimal offer;
     private String brand;
 
     @Column(nullable = false)

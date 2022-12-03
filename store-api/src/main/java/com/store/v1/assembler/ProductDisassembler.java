@@ -1,5 +1,6 @@
 package com.store.v1.assembler;
 
+import com.store.domain.model.Department;
 import com.store.domain.model.Product;
 import com.store.v1.model.input.ProductInput;
 import lombok.AllArgsConstructor;
@@ -14,5 +15,10 @@ public class ProductDisassembler {
 
     public Product toDomainObject(ProductInput productInput) {
         return modelMapper.map(productInput, Product.class);
+    }
+
+    public void copyToDomainObject(ProductInput productInput, Product currentProduct) {
+        currentProduct.setDepartment(new Department());
+        modelMapper.map(productInput, currentProduct);
     }
 }

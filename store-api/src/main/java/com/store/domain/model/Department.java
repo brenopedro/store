@@ -21,7 +21,6 @@ public class Department {
     @Column(nullable = false)
     private String name;
 
-    @ToString.Exclude
     @OneToMany(mappedBy = "department")
     private Set<Product> products = new HashSet<>();
 }

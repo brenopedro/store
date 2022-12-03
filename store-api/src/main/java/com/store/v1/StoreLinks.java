@@ -17,9 +17,11 @@ public class StoreLinks {
     public Link linkToDepartments(String rel) {
         return linkTo(DepartmentController.class).withRel(rel);
     }
+
     public Link linkToDepartment(Long departmentId, String rel) {
         return linkTo(methodOn(DepartmentController.class).getDepartment(departmentId)).withRel(rel);
     }
+
     public Link linkToDepartment(Long departmentId) {
         return linkToDepartment(departmentId, IanaLinkRelations.SELF.value());
     }

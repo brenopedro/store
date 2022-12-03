@@ -2,6 +2,7 @@ package com.store.domain.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
 
 import javax.persistence.*;
@@ -11,7 +12,8 @@ import java.util.List;
 @Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class User {
+public class User extends AbstractAggregateRoot<User> {
+
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)

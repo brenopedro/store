@@ -6,7 +6,7 @@ import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
-@Relation(collectionRelation = "address")
+@Relation(collectionRelation = "addresses")
 @Getter
 @Setter
 public class AddressModel extends RepresentationModel<AddressModel> {
