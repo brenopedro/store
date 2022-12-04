@@ -44,4 +44,20 @@ public class Product extends AbstractAggregateRoot<Product> {
     @JoinTable(name = "product_department", joinColumns = @JoinColumn(name = "product_id"),
                 inverseJoinColumns = @JoinColumn(name = "department_id"))
     private Department department;
+
+    public void activate() {
+        setActive(true);
+    }
+
+    public void deactivate() {
+        setActive(false);
+    }
+
+    public void changePrice(BigDecimal newPrice) {
+        setPrice(newPrice);
+    }
+
+    public void chageInventory(Integer newInventory) {
+        setInventory(newInventory);
+    }
 }

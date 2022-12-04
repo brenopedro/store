@@ -15,5 +15,6 @@ public class ProductFilter {
     private String brand;
     private String category;
     private String productType;
-    private Long departmentId;
+
+    private Boolean active;
 }

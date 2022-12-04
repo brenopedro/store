@@ -27,16 +27,19 @@ public class DepartmentController implements DepartmentControllerOpenApi {
     private final DepartmentRepository departmentRepository;
 
 
+    @Override
     @GetMapping
     public ResponseEntity<CollectionModel<DepartmentModel>> getDepartmentList() {
         return ResponseEntity.ok(departmentAssembler.toCollectionModel(departmentRepository.findAll()));
     }
 
+    @Override
     @GetMapping("/{departmentId}")
     public ResponseEntity<DepartmentModel> getDepartment(@PathVariable Long departmentId) {
         return ResponseEntity.ok(departmentAssembler.toModel(departmentService.getDepartment(departmentId)));
     }
 
+    @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public DepartmentModel postDepartment(@RequestBody @Valid DepartmentInput departmentInput) {
@@ -46,6 +49,7 @@ public class DepartmentController implements DepartmentControllerOpenApi {
         return departmentAssembler.toModel(departmentSaved);
     }
 
+    @Override
     @DeleteMapping("/{departmentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteDepartment(@PathVariable Long departmentId) {

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 
-public class ProdutoSpecs {
+public class ProductSpecs {
 
     public static Specification<Product> filter(ProductFilter productFilter) {
         return (root, query, criteriaBuilder) -> {
@@ -38,8 +38,8 @@ public class ProdutoSpecs {
                 predicates.add(criteriaBuilder.equal(root.get("productType"), productFilter.getProductType()));
             }
 
-            if (productFilter.getDepartmentId() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("department"), productFilter.getDepartmentId()));
+            if (productFilter.getActive() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("active"), productFilter.getActive()));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
