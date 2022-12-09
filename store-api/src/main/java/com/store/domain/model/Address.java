@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.domain.AbstractAggregateRoot;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Data

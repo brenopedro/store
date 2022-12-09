@@ -1,10 +1,9 @@
 package com.store.domain.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 

@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.5</version>
+        <version>3.0.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.store</groupId>
@@ -16,7 +16,7 @@
     <properties>
         <java.version>19</java.version>
         <modelmapper.version>3.1.0</modelmapper.version>
-        <springdoc.version>1.6.12</springdoc.version>
+        <springdoc.version>2.0.0</springdoc.version>
     </properties>
     <dependencies>
         <dependency>
@@ -75,12 +75,12 @@
 
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
+            <artifactId>springdoc-openapi-starter-common</artifactId>
             <version>${springdoc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-hateoas</artifactId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc.version}</version>
         </dependency>
 

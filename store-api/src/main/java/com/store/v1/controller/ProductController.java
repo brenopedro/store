@@ -21,7 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -62,6 +62,8 @@ public class ProductController {
     public ResponseEntity<ProductModel> putProduct(@PathVariable Long productId, @RequestBody @Valid ProductInput productInput) {
         Product currentProduct = productService.getProduct(productId);
 
+        productDisassembler.copyToDomainObject(productInput, currentProduct);
+
         return ResponseEntity.ok(productAssembler.toModel(productService.save(currentProduct)));
     }
 
@@ -99,14 +101,14 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{productId}/new-price")
+    @PutMapping("/{productId}/price")
     public ResponseEntity<ProductResumoModel> changePrice(@PathVariable Long productId, @RequestBody BigDecimal newPrice) {
         Product product = productService.changePrice(productId, newPrice);
 
         return ResponseEntity.ok(productResumoModelAssembler.toModel(product));
     }
 
-    @PutMapping("/{productId}/new-inventory")
+    @PutMapping("/{productId}/inventory")
     public ResponseEntity<ProductResumoModel> changeInventory(@PathVariable Long productId, @RequestBody Integer newInventory) {
         Product product = productService.changeInventory(productId, newInventory);
 

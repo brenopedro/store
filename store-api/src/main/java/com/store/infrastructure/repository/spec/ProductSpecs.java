@@ -4,7 +4,7 @@ import com.store.domain.filter.ProductFilter;
 import com.store.domain.model.Product;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Predicate;
 import java.util.ArrayList;
 
 public class ProductSpecs {
