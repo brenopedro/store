@@ -45,6 +45,9 @@ public class Product extends AbstractAggregateRoot<Product> {
                 inverseJoinColumns = @JoinColumn(name = "department_id"))
     private Department department;
 
+    @Embedded
+    private Rate rate;
+
     public void activate() {
         setActive(true);
     }
@@ -57,7 +60,7 @@ public class Product extends AbstractAggregateRoot<Product> {
         setPrice(newPrice);
     }
 
-    public void chageInventory(Integer newInventory) {
+    public void changeInventory(Integer newInventory) {
         setInventory(newInventory);
     }
 }

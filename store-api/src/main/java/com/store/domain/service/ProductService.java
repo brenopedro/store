@@ -72,7 +72,7 @@ public class ProductService {
     @Transactional
     public Product changeInventory(Long productId, Integer newInventory) {
         Product product = getProduct(productId);
-        product.chageInventory(newInventory);
+        product.changeInventory(newInventory);
 
         return product;
     }

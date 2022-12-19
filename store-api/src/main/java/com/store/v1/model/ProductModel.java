@@ -22,4 +22,5 @@ public class ProductModel extends RepresentationModel<ProductModel> {
     private String productType;
     private Boolean active;
     private DepartmentModel department;
+    private RateModel rate;
 }
