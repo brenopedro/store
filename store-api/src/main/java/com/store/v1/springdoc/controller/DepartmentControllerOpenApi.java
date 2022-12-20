@@ -29,7 +29,7 @@ public interface DepartmentControllerOpenApi {
 
     @Operation(summary = "Add new department",
             responses = {
-                    @ApiResponse(responseCode = "200"),
+                    @ApiResponse(responseCode = "201"),
                     @ApiResponse(responseCode = "400", description = "Invalid data",
                             content = @Content(schema = @Schema(ref = "Problem"))
                     )

@@ -31,7 +31,7 @@ public interface AddressControllerOpenApi {
 
     @Operation(summary = "Add new address",
             responses = {
-                    @ApiResponse(responseCode = "200"),
+                    @ApiResponse(responseCode = "201"),
                     @ApiResponse(responseCode = "400", description = "Invalid data",
                             content = @Content(schema = @Schema(ref = "Problem"))
                     )

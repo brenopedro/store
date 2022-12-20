@@ -11,6 +11,7 @@ import com.store.v1.assembler.ProductResumoModelAssembler;
 import com.store.v1.model.ProductModel;
 import com.store.v1.model.ProductResumoModel;
 import com.store.v1.model.input.ProductInput;
+import com.store.v1.springdoc.controller.ProductControllerOpenApi;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +29,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/v1/products")
-public class ProductController {
+public class ProductController implements ProductControllerOpenApi {
 
     private final ProductResumoModelAssembler productResumoModelAssembler;
     private final ProductAssembler productAssembler;
@@ -37,6 +38,7 @@ public class ProductController {
     private final ProductRepository productRepository;
     private final PagedResourcesAssembler<Product> pagedResourcesAssembler;
 
+    @Override
     @GetMapping
     public PagedModel<ProductModel> getProductList(ProductFilter productFilter, @PageableDefault Pageable pageable) {
         Page<Product> productPage = productRepository.findAll(ProductSpecs.filter(productFilter), pageable);
@@ -45,11 +47,13 @@ public class ProductController {
         return pagedResourcesAssembler.toModel(productPage, productAssembler);
     }
 
+    @Override
     @GetMapping("/{productId}")
     public ResponseEntity<ProductModel> getProduct(@PathVariable Long productId) {
         return ResponseEntity.ok(productAssembler.toModel(productService.getProduct(productId)));
     }
 
+    @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ProductModel postProduct(@RequestBody @Valid ProductInput productInput) {
@@ -58,6 +62,7 @@ public class ProductController {
         return productAssembler.toModel(productSaved);
     }
 
+    @Override
     @PutMapping("/{productId}")
     public ResponseEntity<ProductModel> putProduct(@PathVariable Long productId, @RequestBody @Valid ProductInput productInput) {
         Product currentProduct = productService.getProduct(productId);
@@ -67,10 +72,11 @@ public class ProductController {
         return ResponseEntity.ok(productAssembler.toModel(productService.save(currentProduct)));
     }
 
-    @DeleteMapping("/{departmentId}")
+    @Override
+    @DeleteMapping("/{productId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProduct(@PathVariable Long departmentId) {
-        productService.delete(departmentId);
+    public void deleteProduct(@PathVariable Long productId) {
+        productService.delete(productId);
     }
 
     @PutMapping("/{productId}/activate")
@@ -80,6 +86,7 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
+    @Override
     @DeleteMapping("/{productId}/activate")
     public ResponseEntity<Void> deactivate(@PathVariable Long productId) {
         productService.deactivate(productId);
@@ -87,6 +94,7 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
+    @Override
     @PutMapping("/activations")
     public ResponseEntity<Void> activateMultiples(@RequestBody List<Long> productsId) {
         productService.activateMultiples(productsId);
@@ -94,6 +102,7 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
+    @Override
     @DeleteMapping("/activations")
     public ResponseEntity<Void> deactivateMultiples(@RequestBody List<Long> productsId) {
         productService.deactivateMultiples(productsId);
@@ -101,6 +110,7 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
+    @Override
     @PutMapping("/{productId}/price")
     public ResponseEntity<ProductResumoModel> changePrice(@PathVariable Long productId, @RequestBody BigDecimal newPrice) {
         Product product = productService.changePrice(productId, newPrice);
@@ -108,6 +118,7 @@ public class ProductController {
         return ResponseEntity.ok(productResumoModelAssembler.toModel(product));
     }
 
+    @Override
     @PutMapping("/{productId}/inventory")
     public ResponseEntity<ProductResumoModel> changeInventory(@PathVariable Long productId, @RequestBody Integer newInventory) {
         Product product = productService.changeInventory(productId, newInventory);
