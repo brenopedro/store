@@ -11,7 +11,8 @@ public enum ProblemType {
     INVALID_PARAMETER("Invalid parameter"),
     INCOMPREHENSIBLE_MESSAGE("Incomprehensible message"),
     RESOURCE_NOT_FOUND("Resource not found"),
-    ENTITY_IN_USE("Entity in use");
+    ENTITY_IN_USE("Entity in use"),
+    ENTITY_EXISTS("Already exists a entity with this name");
 
     private final String title;
     ProblemType(String title) {
