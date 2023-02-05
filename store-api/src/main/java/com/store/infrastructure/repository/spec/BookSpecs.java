@@ -20,11 +20,19 @@ public class BookSpecs {
 
             // colocar filtro para comparar com a oferta caso não seja nula
             if (bookFilter.getLowPrice() != null) {
-                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("price"), bookFilter.getLowPrice()));
+                if(root.get("offer") != null) {
+                    predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("offer"), bookFilter.getLowPrice()));
+                } else {
+                    predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("price"), bookFilter.getLowPrice()));
+                }
             }
 
             if (bookFilter.getBigPrice() != null) {
-                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("price"), bookFilter.getBigPrice()));
+                if(root.get("offer") != null) {
+                    predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("offer"), bookFilter.getBigPrice()));
+                } else {
+                    predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("price"), bookFilter.getBigPrice()));
+                }
             }
 
             if (bookFilter.getBrand() != null) {
@@ -35,9 +43,8 @@ public class BookSpecs {
                 predicates.add(criteriaBuilder.equal(root.get("year"), bookFilter.getYear()));
             }
 
-            // botar filtro igual ao nome
             if (bookFilter.getAuthor() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("author"), bookFilter.getAuthor()));
+                predicates.add(criteriaBuilder.like(root.get("author"), "%" + bookFilter.getAuthor() + "%"));
             }
 
             if (bookFilter.getPublishingCompany() != null) {
@@ -45,11 +52,11 @@ public class BookSpecs {
             }
 
             if (bookFilter.getCategory() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("category"), bookFilter.getCategory()));
+                predicates.add(criteriaBuilder.equal(root.get("category").get("name"), bookFilter.getCategory()));
             }
 
             if (bookFilter.getSubCategory() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("subCategory"), bookFilter.getSubCategory()));
+                predicates.add(criteriaBuilder.equal(root.get("subCategory").get("name"), bookFilter.getSubCategory()));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

@@ -14,7 +14,7 @@ values ('Cass, Kiera', 'WMF Martins Fontes', 'Muitas garotas sonham em ser princ
 
 insert into book (author, brand, description, finishing, inventory, isbn, language, name, number_of_pages, offer, original_title, price, publishing_company, year)
 values ('Hill, Napoleon', 'Citadel', 'Compre na Saraiva o livro Mais Esperto que o Diabo O Mistério Revelado da Liberdade e do Sucesso com mais de 100 milhões de copias vendidas no mundo. O seu propósito, escrito com suas próprias palavras, é ajudar o ser humano a descobrir o seu real potencial, desvendando as armadilhas mentais que os homens e as mulheres deste mundo criam para si mesmos, sabotando a sua própria liberdade e o seu próprio direito de viver uma vida cheia de desafios, alegria e liberdade. Escrito em 1938, após uma das maiores crises econômicas, e precedendo a Segunda Guerra Mundial, este livro não somente é uma fonte de inspiração e coragem, mas deve ser considerado um manual para todas aquelas pessoas que desejam',
-        'Livro brochura (paperback)', 609, '9788568014004', 'Português', 'Mais esperto que o Diabo', 208, 39.90, 'Mais esperto que o Diabo', 49.90, 'CDG Edições e Publicações Eireli', 2014);
+        'Livro brochura (paperback)', 609, '9788568014004', 'Português', 'Mais esperto que o Diabo', 208, 33.90, 'Mais esperto que o Diabo', 59.90, 'CDG Edições e Publicações Eireli', 2014);
 
 insert into category (name) values ('Literatura Infantojuvenil');
 insert into category (name) values ('Autoajuda');
