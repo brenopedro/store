@@ -18,6 +18,7 @@ public class BookSpecs {
                 predicates.add(criteriaBuilder.like(root.get("name"), "%" + bookFilter.getName() + "%"));
             }
 
+            // colocar filtro para comparar com a oferta caso não seja nula
             if (bookFilter.getLowPrice() != null) {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("price"), bookFilter.getLowPrice()));
             }
@@ -34,6 +35,7 @@ public class BookSpecs {
                 predicates.add(criteriaBuilder.equal(root.get("year"), bookFilter.getYear()));
             }
 
+            // botar filtro igual ao nome
             if (bookFilter.getAuthor() != null) {
                 predicates.add(criteriaBuilder.equal(root.get("author"), bookFilter.getAuthor()));
             }
