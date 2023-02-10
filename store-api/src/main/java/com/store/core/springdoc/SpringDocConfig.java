@@ -44,9 +44,9 @@ public class SpringDocConfig {
                         .description("Breno and Sigrid")
                         .url("No web site yet")
                 ).tags(Arrays.asList(
-                        new Tag().name("Department").description("Department management"),
-                        new Tag().name("Product").description("Product management"),
-                        new Tag().name("Address").description("Address management")
+                        new Tag().name("Book").description("Book management"),
+                        new Tag().name("Category").description("Category management"),
+                        new Tag().name("SubCategory").description("SubCategory management")
                 )).components(new Components()
                         .schemas(generateSchemas())
                         .responses(generateResponses())

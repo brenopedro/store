@@ -9,13 +9,13 @@ import com.store.v1.assembler.BookAssembler;
 import com.store.v1.assembler.BookDisassembler;
 import com.store.v1.model.BookModel;
 import com.store.v1.model.input.BookInput;
+import com.store.v1.springdoc.controller.BookControllerOpenApi;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/v1/books")
-public class BookController {
+public class BookController implements BookControllerOpenApi {
 
     private final BookAssembler bookAssembler;
     private final BookDisassembler bookDisassembler;
@@ -33,7 +33,7 @@ public class BookController {
     private final BookRepository bookRepository;
     private final PagedResourcesAssembler<Book> pagedResourcesAssembler;
 
-//    @Override
+    @Override
     @GetMapping
     public PagedModel<BookModel> getProductList(BookFilter bookFilter, @PageableDefault Pageable pageable) {
         Page<Book> productPage = bookRepository.findAll(BookSpecs.filter(bookFilter), pageable);
@@ -42,18 +42,13 @@ public class BookController {
         return pagedResourcesAssembler.toModel(productPage, bookAssembler);
     }
 
-//    @GetMapping
-//    public CollectionModel<BookModel> getBookList() {
-//
-//
-//        return bookAssembler.toCollectionModel(bookRepository.findAll());
-//    }
-
-    @GetMapping("/{productId}")
-    public ResponseEntity<BookModel> getSingleBook(@PathVariable Long productId) {
-        return ResponseEntity.ok(bookAssembler.toModel(bookService.getBook(productId)));
+    @Override
+    @GetMapping("/{bookId}")
+    public ResponseEntity<BookModel> getSingleBook(@PathVariable Long bookId) {
+        return ResponseEntity.ok(bookAssembler.toModel(bookService.getBook(bookId)));
     }
 
+    @Override
     @PostMapping
     public ResponseEntity<BookModel> postBook(@RequestBody @Valid BookInput bookInput) {
         Book bookSaved = bookService.save(bookDisassembler.toDomainObject(bookInput));
@@ -61,18 +56,20 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.CREATED).body(bookAssembler.toModel(bookSaved));
     }
 
-    @PutMapping("/{productId}")
-    public ResponseEntity<BookModel> putProduct(@PathVariable Long productId, @RequestBody @Valid BookInput bookInput) {
-        Book currentBook = bookService.getBook(productId);
+    @Override
+    @PutMapping("/{bookId}")
+    public ResponseEntity<BookModel> putBook(@PathVariable Long bookId, @RequestBody @Valid BookInput bookInput) {
+        Book currentBook = bookService.getBook(bookId);
 
         bookDisassembler.copyToDomainObject(bookInput, currentBook);
 
         return ResponseEntity.ok(bookAssembler.toModel(bookService.save(currentBook)));
     }
 
-    @DeleteMapping("/{productId}")
-    public ResponseEntity<Void> deleteBook(@PathVariable Long productId) {
-        bookService.delete(productId);
+    @Override
+    @DeleteMapping("/{bookId}")
+    public ResponseEntity<Void> deleteBook(@PathVariable Long bookId) {
+        bookService.delete(bookId);
         return ResponseEntity.noContent().build();
     }
 }

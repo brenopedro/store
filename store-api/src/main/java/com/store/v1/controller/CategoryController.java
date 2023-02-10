@@ -7,6 +7,7 @@ import com.store.v1.assembler.CategoryAssembler;
 import com.store.v1.assembler.CategoryDisassembler;
 import com.store.v1.model.CategoryModel;
 import com.store.v1.model.input.CategoryInput;
+import com.store.v1.springdoc.controller.CategoryControllerOpenApi;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
@@ -16,23 +17,26 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/v1/categories")
 @AllArgsConstructor
-public class CategoryController {
+public class CategoryController implements CategoryControllerOpenApi {
 
     private final CategoryService categoryService;
     private final CategoryRepository categoryRepository;
     private final CategoryDisassembler categoryDisassembler;
     private final CategoryAssembler categoryAssembler;
 
+    @Override
     @GetMapping
     public ResponseEntity<CollectionModel<CategoryModel>> getCategoryList() {
         return ResponseEntity.ok(categoryAssembler.toCollectionModel(categoryRepository.findAll()));
     }
 
+    @Override
     @GetMapping("/{categoryId}")
     public ResponseEntity<CategoryModel> getSingleCategory(@PathVariable Long categoryId) {
         return ResponseEntity.ok(categoryAssembler.toModel(categoryService.getCategory(categoryId)));
     }
 
+    @Override
     @PostMapping
     public ResponseEntity<CategoryModel> postCategory(@RequestBody CategoryInput categoryInput) {
         Category categorySaved = categoryService.save(categoryDisassembler.toDomainObject(categoryInput));
@@ -40,6 +44,7 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryAssembler.toModel(categorySaved));
     }
 
+    @Override
     @DeleteMapping("/{categoryId}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Long categoryId) {
         categoryService.delete(categoryId);

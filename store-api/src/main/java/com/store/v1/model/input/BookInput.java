@@ -14,46 +14,54 @@ import java.time.Year;
 @Setter
 public class BookInput {
 
-    @Schema(example = "Keyboard husky")
+    @Schema(example = "A Seleção")
     @NotBlank
     private String name;
 
-    @Schema(example = "566.12")
+    @Schema(example = "49.90")
     @NotNull
     private BigDecimal price;
 
-    @Schema(example = "566.12")
+    @Schema(example = "39.90")
     private BigDecimal offer;
 
-    @Schema(example = "Keyboard husky, black, brown switch")
+    @Schema(example = "A good book")
     @NotBlank
     private String description;
 
-    @Schema(example = "Husky")
+    @Schema(example = "WMF Martins Fontes")
     @NotBlank
     private String brand;
 
+    @Schema(example = "2012")
     @NotNull
     private Year year;
 
+    @Schema(example = "Cass, Kiera")
     @NotBlank
     private String author;
 
+    @Schema(example = "Editora Schwarcz SA")
     @NotBlank
     private String publishingCompany;
 
+    @Schema(example = "Português")
     @NotBlank
     private String language;
 
+    @Schema(example = "156")
     @NotNull
     private Integer numberOfPages;
 
+    @Schema(example = "Livro brochura (paperback)")
     @NotBlank
     private String finishing;
 
+    @Schema(example = "The Selection")
     @NotBlank
     private String originalTitle;
 
+    @Schema(example = "9788565765015")
     @NotBlank
     private String isbn;
 

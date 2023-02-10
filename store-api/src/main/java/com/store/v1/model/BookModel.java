@@ -16,35 +16,43 @@ public class BookModel extends RepresentationModel<BookModel> {
     @Schema(example = "1")
     private Long Id;
 
-    @Schema(example = "Keyboard husky")
+    @Schema(example = "A Seleção")
     private String name;
 
-    @Schema(example = "566.12")
+    @Schema(example = "49.90")
     private BigDecimal price;
 
-    @Schema(example = "566.12")
+    @Schema(example = "39.90")
     private BigDecimal offer;
 
-    @Schema(example = "Keyboard husky, black, brown switch")
+    @Schema(example = "A good book")
     private String description;
 
-    @Schema(example = "Husky")
+    @Schema(example = "WMF Martins Fontes")
     private String brand;
 
+    @Schema(example = "2012")
     private String year;
-    
+
+    @Schema(example = "Cass, Kiera")
     private String author;
-    
+
+    @Schema(example = "Editora Schwarcz SA")
     private String publishingCompany;
-    
+
+    @Schema(example = "Português")
     private String language;
 
+    @Schema(example = "156")
     private Integer numberOfPages;
 
+    @Schema(example = "Livro brochura (paperback)")
     private String finishing;
 
+    @Schema(example = "The Selection")
     private String originalTitle;
 
+    @Schema(example = "9788565765015")
     private String isbn;
 
     @Schema(example = "165")
